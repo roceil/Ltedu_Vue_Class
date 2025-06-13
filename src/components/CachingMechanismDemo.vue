@@ -97,7 +97,7 @@ const triggerRecalculation = () => {
   // 改變 baseNumber 會觸發 computed 重新計算
   baseNumber.value = baseNumber.value + 1
   // 觸發 computed 重新計算
-  const _ = primeCountComputed.value
+  primeCountComputed.value
   // 模擬多次調用 method
   simulateMethodCalls()
 
@@ -110,7 +110,7 @@ const triggerRecalculation = () => {
 // 組件載入時初始化
 onMounted(() => {
   // 觸發 computed 計算
-  const _ = primeCountComputed.value
+  primeCountComputed.value
   // 模擬多次調用 method
   simulateMethodCalls()
 })

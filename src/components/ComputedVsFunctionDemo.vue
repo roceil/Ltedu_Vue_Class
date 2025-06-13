@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 // 時間相關數據
 const currentTime = ref(Date.now())
-let timer: NodeJS.Timeout | null = null
+let timer: number | null = null
 const timeFormat = ref('long')
 
 // 執行計數器
@@ -281,11 +281,11 @@ onUnmounted(() => {
           <div class="p-3 bg-green-900 border border-green-500 rounded">
             <div class="text-sm space-y-1">
               <div><span class="text-green-300">姓名:</span> <span class="text-green-100">{{ userInfoComputed.fullName
-              }}</span></div>
+                  }}</span></div>
               <div><span class="text-green-300">年齡:</span> <span class="text-green-100">{{ userInfoComputed.age
-              }}</span></div>
+                  }}</span></div>
               <div><span class="text-green-300">年齡層:</span> <span class="text-green-100">{{ userInfoComputed.ageGroup
-              }}</span></div>
+                  }}</span></div>
             </div>
           </div>
         </div>
@@ -365,7 +365,7 @@ onUnmounted(() => {
                 <div><span class="text-orange-300">姓名:</span> <span class="text-orange-100">{{
                   getUserInfoMethod().fullName }}</span></div>
                 <div><span class="text-orange-300">年齡:</span> <span class="text-orange-100">{{ getUserInfoMethod().age
-                }}</span></div>
+                    }}</span></div>
                 <div><span class="text-orange-300">年齡層:</span> <span class="text-orange-100">{{
                   getUserInfoMethod().ageGroup }}</span></div>
               </div>
@@ -401,7 +401,7 @@ onUnmounted(() => {
               <div class="text-sm text-orange-300">自定義數組 [5,10,15,20]:</div>
               <div class="text-2xl font-bold text-orange-100">{{ getComplexCalculationMethod([5, 10, 15, 20], 2, 0,
                 'sum')
-                }}</div>
+              }}</div>
             </div>
           </div>
         </div>
