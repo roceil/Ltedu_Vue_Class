@@ -22,6 +22,10 @@ const links = [
     name: 'If',
     path: '/if',
   },
+  {
+    name: 'LifeCycle',
+    path: '/life-cycle',
+  },
 ]
 
 const navRef = ref<HTMLElement>()

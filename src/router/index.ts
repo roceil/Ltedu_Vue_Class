@@ -7,6 +7,7 @@ const routes = [
   { path: '/watch', component: () => import('../views/watch.vue') },
   { path: '/for', component: () => import('../views/for.vue') },
   { path: '/if', component: () => import('../views/if.vue') },
+  { path: '/life-cycle', component: () => import('../views/lifeCycle.vue') },
 ]
 
 export const router = createRouter({

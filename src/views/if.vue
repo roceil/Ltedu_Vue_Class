@@ -5,6 +5,7 @@ import LifecycleDemo from '../components/LifecycleDemo.vue'
 import VIfScenarios from '../components/VIfScenarios.vue'
 import VShowScenarios from '../components/VShowScenarios.vue'
 import VForVIfIssues from '../components/VForVIfIssues.vue'
+import VElseDemo from '../components/VElseDemo.vue'
 import PerformanceSummary from '../components/PerformanceSummary.vue'
 </script>
 
@@ -20,8 +21,8 @@ import PerformanceSummary from '../components/PerformanceSummary.vue'
 
     <!-- 概述說明 -->
     <div class="mb-8 p-6 bg-gradient-to-r from-blue-900 to-purple-900 border border-blue-600 rounded-lg">
-      <h2 class="text-2xl font-bold text-white mb-4">📚 什麼是 V-if 和 V-show？</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <h2 class="text-2xl font-bold text-white mb-4">📚 什麼是條件渲染指令？</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="p-4 bg-gray-800 rounded border border-blue-500">
           <h3 class="text-lg font-semibold text-blue-400 mb-2">V-if</h3>
           <p class="text-gray-300 text-sm">
@@ -32,6 +33,12 @@ import PerformanceSummary from '../components/PerformanceSummary.vue'
           <h3 class="text-lg font-semibold text-green-400 mb-2">V-show</h3>
           <p class="text-gray-300 text-sm">
             基於 CSS 的條件顯示，元素始終被渲染到 DOM 中，只是通過 CSS display 屬性控制顯示與隱藏。
+          </p>
+        </div>
+        <div class="p-4 bg-gray-800 rounded border border-purple-500">
+          <h3 class="text-lg font-semibold text-purple-400 mb-2">V-else / V-else-if</h3>
+          <p class="text-gray-300 text-sm">
+            與 v-if 配合使用的條件分支，v-else-if 提供額外條件，v-else 處理所有其他情況。
           </p>
         </div>
       </div>
@@ -103,15 +110,24 @@ import PerformanceSummary from '../components/PerformanceSummary.vue'
         <VShowScenarios />
       </div>
 
+      <!-- V-else 與 V-else-if 演示 -->
+      <div class="p-4 border-2 border-dashed border-gray-500 rounded-lg">
+        <h3 class="text-lg font-semibold text-gray-300 mb-2">6. V-else 與 V-else-if 條件分支</h3>
+        <p class="text-sm text-gray-400 mb-4">
+          學習如何使用 v-else 和 v-else-if 構建完整的條件分支邏輯
+        </p>
+        <VElseDemo />
+      </div>
+
       <!-- V-for 與 V-if 問題 -->
       <div class="p-4 border-2 border-dashed border-gray-300 rounded-lg">
-        <h3 class="text-lg font-semibold text-gray-600 mb-2">6. V-for 與 V-if 使用問題</h3>
+        <h3 class="text-lg font-semibold text-gray-600 mb-2">7. V-for 與 V-if 使用問題</h3>
         <VForVIfIssues />
       </div>
 
       <!-- 性能總結 -->
       <div class="p-4 border-2 border-dashed border-gray-300 rounded-lg">
-        <h3 class="text-lg font-semibold text-gray-600 mb-2">7. 性能比較總結</h3>
+        <h3 class="text-lg font-semibold text-gray-600 mb-2">8. 性能比較總結</h3>
         <PerformanceSummary />
       </div>
     </div>
@@ -146,8 +162,17 @@ import PerformanceSummary from '../components/PerformanceSummary.vue'
       <h2 class="text-2xl font-bold text-gray-800 mb-4">📝 總結</h2>
       <div class="prose prose-sm max-w-none text-gray-700">
         <p class="mb-4">
-          V-if 和 V-show 都是條件渲染指令，但在 DOM 處理、性能表現和使用場景上有根本性差異：
+          Vue.js 提供了多種條件渲染指令，各有不同的特點和適用場景：
         </p>
+        <div class="mb-4 p-4 bg-indigo-50 border border-indigo-200 rounded">
+          <h4 class="font-semibold text-indigo-800 mb-2">V-else 和 V-else-if 重點：</h4>
+          <ul class="text-sm space-y-1">
+            <li>• <strong>v-else</strong>：必須緊跟在 v-if 或 v-else-if 元素後面，處理所有其他情況</li>
+            <li>• <strong>v-else-if</strong>：可以鏈式使用，提供多個條件分支選擇</li>
+            <li>• 搭配使用可以構建完整的條件邏輯，避免複雜的嵌套結構</li>
+            <li>• 優於多個獨立的 v-if，因為只會評估一個分支，性能更佳</li>
+          </ul>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div class="p-4 bg-blue-50 border border-blue-200 rounded">
             <h4 class="font-semibold text-blue-800 mb-2">選擇 V-if 當：</h4>
@@ -169,7 +194,7 @@ import PerformanceSummary from '../components/PerformanceSummary.vue'
           </div>
         </div>
         <p class="mt-4 text-center text-gray-600 font-medium">
-          掌握兩者的差異和正確使用方式，能讓你在不同場景下做出最佳的性能選擇 🚀
+          掌握這些條件渲染指令的差異和正確使用方式，能讓你在不同場景下做出最佳的選擇，構建高效且可維護的 Vue.js 應用 🚀
         </p>
       </div>
     </div>
