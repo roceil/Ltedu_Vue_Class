@@ -1,9 +1,7 @@
 <script lang="ts" setup>
-import BasicLifecycleDemo from '../components/BasicLifecycleDemo.vue'
 import StopwatchDemo from '../components/StopwatchDemo.vue'
 import DataLoadingDemo from '../components/DataLoadingDemo.vue'
 import LifecycleOrderDemo from '../components/LifecycleOrderDemo.vue'
-import LifecycleCleanupDemo from '../components/LifecycleCleanupDemo.vue'
 </script>
 
 <template>
@@ -27,39 +25,138 @@ import LifecycleCleanupDemo from '../components/LifecycleCleanupDemo.vue'
           </p>
         </div>
         <div class="p-4 bg-gray-800 rounded border border-teal-500">
-          <h3 class="text-lg font-semibold text-teal-400 mb-2">靈活管理</h3>
+          <h3 class="text-lg font-semibold text-teal-400 mb-2">組合式 API</h3>
           <p class="text-gray-300 text-sm">
-            在 Vue3 Composition API 中，生命週期鉤子以 `on` 開頭的函數形式提供，讓我們能更靈活地管理組件的各個階段。
+            在 Vue3 組合式 API 中，生命週期鉤子以 `on` 開頭的函數形式提供，在 setup() 函數中註冊使用。
           </p>
         </div>
         <div class="p-4 bg-gray-800 rounded border border-cyan-500">
-          <h3 class="text-lg font-semibold text-cyan-400 mb-2">階段處理</h3>
+          <h3 class="text-lg font-semibold text-cyan-400 mb-2">靈活管理</h3>
           <p class="text-gray-300 text-sm">
-            從組件創建、掛載、更新到卸載，每個階段都有相應的鉤子函數，讓你精確控制程式執行時機。
+            組合式 API 的生命週期鉤子提供更靈活的組件邏輯組織方式，便於代碼復用和邏輯封裝。
           </p>
         </div>
       </div>
     </div>
 
-    <!-- 生命週期順序 -->
+    <!-- 生命週期列表 -->
     <div class="mb-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-      <h2 class="text-2xl font-bold text-gray-800 mb-4">⚡ Vue3 生命週期順序</h2>
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">⚡ Vue3 組合式 API 生命週期</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="p-4 bg-white rounded border border-blue-200">
-          <h3 class="font-semibold text-blue-700 mb-3">創建與掛載階段</h3>
-          <ul class="text-sm text-gray-700 space-y-2">
-            <li><strong>1. setup()：</strong> 組件創建（等同於 Vue2 的 `created`）</li>
-            <li><strong>2. onBeforeMount()：</strong> 掛載前，DOM 尚未創建</li>
-            <li><strong>3. onMounted()：</strong> 掛載完成，可以訪問 DOM</li>
+          <h3 class="font-semibold text-blue-700 mb-3">核心生命週期</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li><strong>onBeforeMount()：</strong> 掛載前，響應式狀態已設置，DOM 尚未創建</li>
+            <li><strong>onMounted()：</strong> 掛載完成，DOM 樹已創建並插入父容器</li>
+            <li><strong>onBeforeUpdate()：</strong> 更新前，可訪問更新前的 DOM 狀態</li>
+            <li><strong>onUpdated()：</strong> 更新完成，DOM 樹已更新</li>
+            <li><strong>onBeforeUnmount()：</strong> 卸載前，組件實例仍保有全部功能</li>
+            <li><strong>onUnmounted()：</strong> 卸載完成，所有子組件和響應式作用已停止</li>
           </ul>
         </div>
         <div class="p-4 bg-white rounded border border-blue-200">
-          <h3 class="font-semibold text-blue-700 mb-3">更新與卸載階段</h3>
+          <h3 class="font-semibold text-blue-700 mb-3">特殊生命週期</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li><strong>onErrorCaptured()：</strong> 捕獲後代組件傳遞的錯誤</li>
+            <li><strong>onRenderTracked()：</strong> 追蹤到響應式依賴時調用 (調試用)</li>
+            <li><strong>onRenderTriggered()：</strong> 響應式依賴變更觸發渲染時調用 (調試用)</li>
+            <li><strong>onActivated()：</strong> KeepAlive 組件被插入 DOM 時調用</li>
+            <li><strong>onDeactivated()：</strong> KeepAlive 組件從 DOM 移除時調用</li>
+            <li><strong>onServerPrefetch()：</strong> 服務端渲染前異步數據抓取 (SSR 專用)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- setup 函式特別說明 -->
+    <div class="mb-8 p-6 bg-gradient-to-r from-purple-100 to-pink-100 border border-purple-300 rounded-lg">
+      <h2 class="text-2xl font-bold text-purple-800 mb-4">🔧 setup() 函式特別說明</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-4 bg-white rounded border border-purple-200">
+          <h3 class="font-semibold text-purple-700 mb-3">setup 函式的功用</h3>
           <ul class="text-sm text-gray-700 space-y-2">
-            <li><strong>4. onBeforeUpdate()：</strong> 更新前，數據改變</li>
-            <li><strong>5. onUpdated()：</strong> 更新完成，DOM 已更新</li>
-            <li><strong>6. onBeforeUnmount()：</strong> 卸載前，準備清理</li>
-            <li><strong>7. onUnmounted()：</strong> 卸載完成，清理資源</li>
+            <li>• <strong>執行時機：</strong> 在組件實例創建時執行，是組合式 API 的入口點</li>
+            <li>• <strong>功能整合：</strong> 整合了原本 beforeCreate 和 created 的所有功能</li>
+            <li>• <strong>同步調用：</strong> 所有生命週期鉤子都在 setup() 階段同步調用</li>
+          </ul>
+        </div>
+        <div class="p-4 bg-white rounded border border-purple-200">
+          <h3 class="font-semibold text-purple-700 mb-3">常見用法：&lt;script setup&gt;</h3>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li>• <strong>語法糖：</strong> 使用 &lt;script setup&gt; 簡化語法</li>
+            <li>• <strong>自動暴露：</strong> 變數和函數自動暴露給模板，無需 return</li>
+            <li>• <strong>同步註冊：</strong> 生命週期鉤子直接在頂層同步調用</li>
+            <li>• <strong>更簡潔：</strong> 減少樣板代碼，提升開發體驗</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 代碼示例 -->
+      <div class="mt-6 p-4 bg-white rounded border border-purple-200">
+        <h3 class="font-semibold text-purple-700 mb-3">💡 &lt;script setup&gt; 示例</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="text-sm font-medium text-gray-600 mb-2">❌ 傳統 setup() 寫法：</p>
+            <pre class="bg-gray-800 p-3 rounded text-xs overflow-x-auto"><code class="text-gray-100">&lt;script&gt;
+import { ref, onMounted } from 'vue'
+
+export default {
+  setup() {
+    const count = ref(0)
+    
+    onMounted(() =&gt; {
+      console.log('組件已掛載')
+    })
+    
+    // 需要 return 暴露給模板
+    return {
+      count
+    }
+  }
+}
+&lt;/script&gt;</code></pre>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-gray-600 mb-2">✅ 現代 &lt;script setup&gt; 寫法：</p>
+            <pre class="bg-gray-800 p-3 rounded text-xs overflow-x-auto"><code class="text-gray-100">&lt;script setup&gt;
+import { ref, onMounted } from 'vue'
+
+const count = ref(0)
+
+onMounted(() =&gt; {
+  console.log('組件已掛載')
+})
+
+// 自動暴露給模板，無需 return
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 執行順序說明 -->
+    <div class="mb-8 p-6 bg-amber-50 border border-amber-200 rounded-lg">
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">🔄 生命週期執行順序</h2>
+      <div class="mb-4 p-3 bg-blue-100 border border-blue-300 rounded">
+        <p class="text-sm text-blue-800">
+          <strong>注意：</strong> setup() 不是生命週期鉤子，而是組合式 API 的入口點，在組件實例創建時執行。
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-4 bg-white rounded border border-amber-200">
+          <h3 class="font-semibold text-amber-700 mb-3">掛載階段</h3>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li><strong>1. onBeforeMount()：</strong> 掛載前，響應式狀態已設置</li>
+            <li><strong>2. onMounted()：</strong> 掛載完成，DOM 樹已創建</li>
+          </ul>
+        </div>
+        <div class="p-4 bg-white rounded border border-amber-200">
+          <h3 class="font-semibold text-amber-700 mb-3">更新與卸載階段</h3>
+          <ul class="text-sm text-gray-700 space-y-2">
+            <li><strong>3. onBeforeUpdate()：</strong> 數據更新，DOM 更新前</li>
+            <li><strong>4. onUpdated()：</strong> DOM 更新完成</li>
+            <li><strong>5. onBeforeUnmount()：</strong> 組件卸載前</li>
+            <li><strong>6. onUnmounted()：</strong> 組件卸載完成</li>
           </ul>
         </div>
       </div>
@@ -70,29 +167,64 @@ import LifecycleCleanupDemo from '../components/LifecycleCleanupDemo.vue'
       <h2 class="text-2xl font-bold text-gray-800 mb-4">🎯 重點生命週期詳解</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="p-4 bg-white rounded border border-green-200">
-          <h3 class="font-semibold text-green-700 mb-2">setup() - 組件創建</h3>
+          <h3 class="font-semibold text-green-700 mb-2">onBeforeMount() - 掛載前</h3>
           <ul class="text-sm text-gray-700 space-y-1">
-            <li>• 初始化響應式數據</li>
-            <li>• 設置計算屬性</li>
-            <li>• 調用不依賴 DOM 的 API</li>
-            <li>• 等同於 Vue2 的 created</li>
+            <li>• 組件已完成響應式狀態設置</li>
+            <li>• 還沒有創建 DOM 節點</li>
+            <li>• 即將首次執行 DOM 渲染過程</li>
+            <li>• 服務端渲染期間不會調用</li>
+            <li>• 適合進行掛載前的準備工作</li>
           </ul>
         </div>
         <div class="p-4 bg-white rounded border border-green-200">
           <h3 class="font-semibold text-green-700 mb-2">onMounted() - 掛載完成</h3>
           <ul class="text-sm text-gray-700 space-y-1">
-            <li>• 安全訪問 DOM 元素</li>
-            <li>• 開始計時器或訂閱</li>
-            <li>• 初始化第三方庫</li>
-            <li>• 設置事件監聽器</li>
+            <li>• 所有同步子組件都已掛載</li>
+            <li>• DOM 樹已創建並插入父容器</li>
+            <li>• 可以安全訪問組件的 DOM 元素</li>
+            <li>• 適合執行需要 DOM 的副作用</li>
+            <li>• 服務端渲染期間不會調用</li>
+          </ul>
+        </div>
+        <div class="p-4 bg-white rounded border border-green-200">
+          <h3 class="font-semibold text-green-700 mb-2">onBeforeUpdate() - 更新前</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 響應式狀態變更觸發更新</li>
+            <li>• DOM 尚未更新</li>
+            <li>• 可以訪問更新前的 DOM 狀態</li>
+            <li>• 在此鉤子中更改狀態是安全的</li>
+            <li>• 服務端渲染期間不會調用</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+        <div class="p-4 bg-white rounded border border-green-200">
+          <h3 class="font-semibold text-green-700 mb-2">onUpdated() - 更新完成</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 組件 DOM 樹已更新</li>
+            <li>• 父組件更新鉤子在子組件之後調用</li>
+            <li>• 多個狀態變更可能批量執行</li>
+            <li>• ⚠️ 不要在此鉤子中更改狀態</li>
+            <li>• 服務端渲染期間不會調用</li>
+          </ul>
+        </div>
+        <div class="p-4 bg-white rounded border border-green-200">
+          <h3 class="font-semibold text-green-700 mb-2">onBeforeUnmount() - 卸載前</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 組件實例仍保有全部功能</li>
+            <li>• 適合進行清理前的準備工作</li>
+            <li>• 可以訪問組件的所有屬性和方法</li>
+            <li>• 服務端渲染期間不會調用</li>
+            <li>• 清理工作的最佳時機</li>
           </ul>
         </div>
         <div class="p-4 bg-white rounded border border-green-200">
           <h3 class="font-semibold text-green-700 mb-2">onUnmounted() - 卸載完成</h3>
           <ul class="text-sm text-gray-700 space-y-1">
-            <li>• 清除計時器</li>
-            <li>• 移除事件監聽器</li>
-            <li>• 取消 API 請求</li>
+            <li>• 所有子組件都已卸載</li>
+            <li>• 所有響應式作用都已停止</li>
+            <li>• 清理計時器、事件監聽器</li>
+            <li>• 取消服務器連接</li>
             <li>• 防止記憶體洩漏</li>
           </ul>
         </div>
@@ -157,27 +289,86 @@ import LifecycleCleanupDemo from '../components/LifecycleCleanupDemo.vue'
       </div>
     </div>
 
-    <!-- 最佳實踐 -->
+    <!-- 最佳實踐與注意事項 -->
     <div class="mt-8 p-6 bg-purple-50 border border-purple-200 rounded-lg">
-      <h2 class="text-2xl font-bold text-purple-800 mb-4">💡 最佳實踐</h2>
+      <h2 class="text-2xl font-bold text-purple-800 mb-4">💡 最佳實踐與注意事項</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="p-4 bg-white rounded border border-purple-200">
           <h3 class="font-semibold text-purple-700 mb-3">✅ 推薦做法</h3>
           <ul class="text-sm text-gray-700 space-y-2">
-            <li>• <strong>onMounted：</strong> 用於 DOM 操作和第三方庫初始化</li>
-            <li>• <strong>onUnmounted：</strong> 必須清理計時器和事件監聽器</li>
-            <li>• <strong>setup：</strong> 只放置不依賴 DOM 的初始化邏輯</li>
+            <li>• <strong>同步註冊：</strong> 所有生命週期鉤子都應在 setup() 中同步調用</li>
+            <li>• <strong>onMounted()：</strong> 用於需要訪問 DOM 的副作用操作</li>
+            <li>• <strong>onUnmounted()：</strong> 手動清理副作用，如計時器、事件監聽器</li>
+            <li>• <strong>onBeforeUpdate()：</strong> 需要訪問更新前 DOM 狀態時使用</li>
             <li>• <strong>資源管理：</strong> 每個創建的資源都要有對應的清理</li>
           </ul>
         </div>
         <div class="p-4 bg-white rounded border border-purple-200">
           <h3 class="font-semibold text-purple-700 mb-3">❌ 避免的做法</h3>
           <ul class="text-sm text-gray-700 space-y-2">
-            <li>• <strong>DOM 操作：</strong> 不要在 setup 中操作 DOM</li>
+            <li>• <strong>異步註冊：</strong> 不要在 async setup() 的 await 之後註冊鉤子</li>
+            <li>• <strong>onUpdated 陷阱：</strong> 絕對不要在 onUpdated 中更改組件狀態</li>
             <li>• <strong>記憶體洩漏：</strong> 忘記在 onUnmounted 中清理資源</li>
-            <li>• <strong>過度使用：</strong> 不要濫用生命週期鉤子</li>
-            <li>• <strong>異步處理：</strong> 注意組件卸載時取消未完成的請求</li>
+            <li>• <strong>條件註冊：</strong> 避免在條件語句中註冊生命週期鉤子</li>
+            <li>• <strong>服務端渲染：</strong> 注意某些鉤子在 SSR 期間不會調用</li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 重要警告 -->
+    <div class="mt-8 p-6 bg-red-50 border border-red-200 rounded-lg">
+      <h2 class="text-2xl font-bold text-red-800 mb-4">⚠️ 重要警告</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="p-4 bg-white rounded border border-red-200">
+          <h3 class="font-semibold text-red-700 mb-3">onUpdated 無限循環</h3>
+          <div class="text-sm text-gray-700 space-y-2">
+            <p class="font-medium text-red-600">❌ 錯誤示例：</p>
+            <pre class="bg-gray-800 p-2 rounded text-xs overflow-x-auto"><code class="text-gray-100">&lt;script setup&gt;
+import { ref, onUpdated } from 'vue'
+
+const count = ref(0)
+
+onUpdated(() => {
+  // 這會導致無限循環！
+  count.value++
+})
+&lt;/script&gt;</code></pre>
+            <p class="font-medium text-green-600">✅ 正確做法：</p>
+            <pre class="bg-gray-800 p-2 rounded text-xs overflow-x-auto"><code class="text-gray-100">&lt;script setup&gt;
+import { onUpdated } from 'vue'
+
+onUpdated(() => {
+  // 只讀取或執行副作用
+  console.log('DOM 已更新')
+})
+&lt;/script&gt;</code></pre>
+          </div>
+        </div>
+        <div class="p-4 bg-white rounded border border-red-200">
+          <h3 class="font-semibold text-red-700 mb-3">生命週期註冊時機</h3>
+          <div class="text-sm text-gray-700 space-y-2">
+            <p class="font-medium text-red-600">❌ 錯誤示例：</p>
+            <pre class="bg-gray-800 p-2 rounded text-xs overflow-x-auto"><code class="text-gray-100">&lt;script setup&gt;
+import { onMounted } from 'vue'
+
+setTimeout(() => {
+  // 異步註冊會失敗！
+  onMounted(() => {
+    console.log('這不會執行')
+  })
+}, 100)
+&lt;/script&gt;</code></pre>
+            <p class="font-medium text-green-600">✅ 正確做法：</p>
+            <pre class="bg-gray-800 p-2 rounded text-xs overflow-x-auto"><code class="text-gray-100">&lt;script setup&gt;
+import { onMounted } from 'vue'
+
+// 直接在頂層同步註冊
+onMounted(() => {
+  console.log('組件已掛載')
+})
+&lt;/script&gt;</code></pre>
+          </div>
         </div>
       </div>
     </div>
@@ -187,30 +378,32 @@ import LifecycleCleanupDemo from '../components/LifecycleCleanupDemo.vue'
       <h2 class="text-2xl font-bold text-gray-800 mb-4">📝 總結</h2>
       <div class="prose prose-sm max-w-none text-gray-700">
         <p class="mb-4">
-          生命週期是 Vue 中管理組件狀態和資源的重要工具，正確使用能讓你構建更穩定的應用：
+          Vue 3 組合式 API 的生命週期鉤子提供了更靈活和強大的組件邏輯管理方式：
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-4 bg-orange-50 border border-orange-200 rounded">
-            <h4 class="font-semibold text-orange-800 mb-2">核心優勢：</h4>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded">
+            <h4 class="font-semibold text-emerald-800 mb-2">核心優勢：</h4>
             <ul class="text-sm space-y-1">
-              <li>• 精確控制代碼執行時機</li>
-              <li>• 有效管理組件資源</li>
-              <li>• 防止記憶體洩漏</li>
-              <li>• 優化應用性能</li>
+              <li>• 更好的邏輯組合和代碼復用</li>
+              <li>• 優秀的 TypeScript 支援</li>
+              <li>• 更直觀的依賴關係</li>
+              <li>• 靈活的邏輯封裝能力</li>
+              <li>• 更好的 Tree-shaking 支援</li>
             </ul>
           </div>
-          <div class="p-4 bg-red-50 border border-red-200 rounded">
-            <h4 class="font-semibold text-red-800 mb-2">適用場景：</h4>
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded">
+            <h4 class="font-semibold text-blue-800 mb-2">實際應用場景：</h4>
             <ul class="text-sm space-y-1">
-              <li>• DOM 操作和第三方庫初始化</li>
-              <li>• 計時器和事件監聽器管理</li>
-              <li>• 資料載入和 API 請求</li>
-              <li>• 資源清理和狀態重置</li>
+              <li>• setup：響應式數據初始化、計算屬性設置</li>
+              <li>• onMounted：DOM 操作、第三方庫初始化、事件監聽</li>
+              <li>• onUnmounted：資源清理、計時器清除、事件移除</li>
+              <li>• onErrorCaptured：錯誤統計和上報</li>
+              <li>• 調試鉤子：性能分析和依賴追蹤</li>
             </ul>
           </div>
         </div>
         <p class="mt-4 text-center text-gray-600 font-medium">
-          掌握生命週期的正確使用方式，能讓你在開發複雜組件時更加得心應手 🚀
+          掌握 Vue 3 組合式 API 生命週期，讓你的組件邏輯更清晰、更易維護 🚀
         </p>
       </div>
     </div>

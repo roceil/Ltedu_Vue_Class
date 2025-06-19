@@ -1,32 +1,33 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { routes } from './router'
 
-const links = [
-  {
-    name: 'Home',
-    path: '/',
-  },
-  {
-    name: 'Computed',
-    path: '/computed',
-  },
-  {
-    name: 'Watch',
-    path: '/watch',
-  },
-  {
-    name: 'For',
-    path: '/for',
-  },
-  {
-    name: 'If',
-    path: '/if',
-  },
-  {
-    name: 'LifeCycle',
-    path: '/life-cycle',
-  },
-]
+// const links = [
+//   {
+//     name: 'Home',
+//     path: '/',
+//   },
+//   {
+//     name: 'Computed',
+//     path: '/computed',
+//   },
+//   {
+//     name: 'Watch',
+//     path: '/watch',
+//   },
+//   {
+//     name: 'For',
+//     path: '/for',
+//   },
+//   {
+//     name: 'If',
+//     path: '/if',
+//   },
+//   {
+//     name: 'LifeCycle',
+//     path: '/life-cycle',
+//   },
+// ]
 
 const navRef = ref<HTMLElement>()
 const hoverIndicator = ref<HTMLElement>()
@@ -82,7 +83,7 @@ const hideHoverIndicator = () => {
 
       <!-- 導航鏈結 -->
       <RouterLink
-        v-for="link in links"
+        v-for="link in routes"
         :key="link.path"
         :to="link.path"
         class="relative px-4 py-2 text-gray-300 font-medium text-sm hover:text-white transition-colors duration-200 rounded-md"
