@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import LifecycleDemoChild from './LifecycleDemoChild.vue'
 
 const count = ref(0)
@@ -19,9 +19,7 @@ const addLog = (stage: string, description: string) => {
 
 // 主組件不再記錄自己的生命週期，只作為控制器
 
-const updateCount = () => {
-  count.value++
-}
+
 
 const toggleComponent = () => {
   showDemoComponent.value = !showDemoComponent.value

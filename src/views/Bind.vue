@@ -1,12 +1,8 @@
 <script lang="ts" setup>
 import BasicBindDemo from '../components/BasicBindDemo.vue'
-import BooleanAttributesDemo from '../components/BooleanAttributesDemo.vue'
 import BindShorthandDemo from '../components/BindShorthandDemo.vue'
-import MultipleBindDemo from '../components/MultipleBindDemo.vue'
 import ClassObjectDemo from '../components/ClassObjectDemo.vue'
 import ClassArrayDemo from '../components/ClassArrayDemo.vue'
-import StyleObjectDemo from '../components/StyleObjectDemo.vue'
-import StyleArrayDemo from '../components/StyleArrayDemo.vue'
 </script>
 
 <template>

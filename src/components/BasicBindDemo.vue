@@ -6,7 +6,6 @@ const imageUrl = ref('https://placehold.jp/4285F4/ffffff/250x150.png?text=Vue+Im
 const linkUrl = ref('#')
 const titleText = ref('這是動態標題')
 const altText = ref('動態描述文字')
-const inputPlaceholder = ref('請輸入文字...')
 
 // 控制狀態
 const imageIndex = ref(1)

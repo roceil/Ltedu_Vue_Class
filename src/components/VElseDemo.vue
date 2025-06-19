@@ -8,62 +8,17 @@ const showContent = ref(false)
 const userRole = ref('guest') // guest, user, admin, vip
 const score = ref(85)
 
-// 場景 3: 表單驗證狀態
-const email = ref('')
-const isValidating = ref(false)
 
-// 場景 4: 資料載入狀態
-const dataStatus = ref('idle') // idle, loading, success, error
-const userData = ref<any>(null)
 
-const checkEmailValidation = () => {
-  if (!email.value) return
 
-  isValidating.value = true
 
-  setTimeout(() => {
-    isValidating.value = false
-  }, 1500)
-}
 
-const loadData = () => {
-  dataStatus.value = 'loading'
 
-  setTimeout(() => {
-    const random = Math.random()
-    if (random > 0.7) {
-      dataStatus.value = 'error'
-    } else {
-      dataStatus.value = 'success'
-      userData.value = {
-        name: 'Vue 開發者',
-        email: 'developer@vue.js',
-        joinDate: '2024-01-01'
-      }
-    }
-  }, 2000)
-}
 
-const resetData = () => {
-  dataStatus.value = 'idle'
-  userData.value = null
-}
 
-const getGradeText = (score: number) => {
-  if (score >= 90) return 'A'
-  if (score >= 80) return 'B'
-  if (score >= 70) return 'C'
-  if (score >= 60) return 'D'
-  return 'F'
-}
 
-const getScoreColor = (score: number) => {
-  if (score >= 90) return 'text-green-400'
-  if (score >= 80) return 'text-blue-400'
-  if (score >= 70) return 'text-yellow-400'
-  if (score >= 60) return 'text-orange-400'
-  return 'text-red-400'
-}
+
+
 </script>
 
 <template>

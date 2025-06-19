@@ -10,7 +10,7 @@ const isLoading = ref(false)
 // 複雜條件狀態
 const userStatus = ref('normal')
 const priority = ref('medium')
-const theme = ref('light')
+
 
 function toggleActive() {
   isActive.value = !isActive.value
@@ -42,12 +42,7 @@ function changePriority() {
   priority.value = priorities[nextIndex]
 }
 
-function changeTheme() {
-  const themes = ['light', 'dark', 'auto']
-  const currentIndex = themes.indexOf(theme.value)
-  const nextIndex = (currentIndex + 1) % themes.length
-  theme.value = themes[nextIndex]
-}
+
 </script>
 
 <template>

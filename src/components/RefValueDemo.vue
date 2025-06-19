@@ -73,9 +73,7 @@ const getCountStatus = () => {
   return '負數狀態'
 }
 
-const clearLog = () => {
-  operationLog.value = []
-}
+
 </script>
 
 <template>

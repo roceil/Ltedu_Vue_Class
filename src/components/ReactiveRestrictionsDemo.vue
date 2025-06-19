@@ -127,12 +127,11 @@ const testRefDestructuring = () => {
   addLog('對比：ref 解構行為', 'info')
 
   // ⚠️ ref 解構原始型別也會失去響應性（與 reactive 相同）
-  let { name, age } = refUser.value
+  let { name } = refUser.value
 
   addLog(`ref 解構前：name = "${refUser.value.name}"`, 'info')
 
   name = 'Ref 解構測試'
-  age = 888
 
   addLog(`修改解構變數：name = "${name}"`, 'info')
   addLog(`原始 ref 資料：name = "${refUser.value.name}"`, 'warning')

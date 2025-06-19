@@ -7,27 +7,7 @@ const textColor = ref('#3b82f6')
 const backgroundColor = ref('#f3f4f6')
 const borderRadius = ref('8px')
 
-// 複雜樣式物件
-const boxStyle = ref({
-  width: '200px',
-  height: '150px',
-  backgroundColor: '#e0e7ff',
-  border: '2px solid #6366f1',
-  borderRadius: '12px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '18px',
-  fontWeight: 'bold',
-  color: '#4338ca'
-})
 
-// 動畫樣式
-const animationStyle = ref({
-  transform: 'translateX(0px)',
-  opacity: 1,
-  transition: 'all 0.3s ease'
-})
 
 // 第一個示例的額外變數
 const borderColor = ref('#3b82f6')
@@ -39,53 +19,35 @@ const borderWidth = ref(3)
 const scale = ref(1)
 
 // 第三個示例：計算樣式物件
-const theme = ref('primary')
-const size = ref('medium')
+const theme = ref<ThemeColor>('blue')
+const size = ref<SizeType>('medium')
 const mode = ref('light')
 
-const themeColors = {
-  blue: { primary: '#3b82f6', light: '#dbeafe', border: '#93c5fd' },
-  green: { primary: '#10b981', light: '#d1fae5', border: '#6ee7b7' },
-  purple: { primary: '#8b5cf6', light: '#ede9fe', border: '#c4b5fd' },
-  red: { primary: '#ef4444', light: '#fee2e2', border: '#fca5a5' }
-}
+type ThemeColor = 'blue' | 'green' | 'purple' | 'red'
+type SizeType = 'small' | 'medium' | 'large'
 
-const sizes = {
-  small: { padding: '8px 12px', fontSize: '12px', width: '120px' },
-  medium: { padding: '12px 16px', fontSize: '14px', width: '160px' },
-  large: { padding: '16px 20px', fontSize: '16px', width: '200px' }
-}
 
-const computedStyle = computed(() => {
-  return {
-    ...sizes[size.value],
-    backgroundColor: themeColors[theme.value].light,
-    color: themeColors[theme.value].primary,
-    border: `2px solid ${themeColors[theme.value].border}`,
-    borderRadius: '8px',
-    textAlign: 'center',
-    transition: 'all 0.3s ease'
-  }
-})
+
+
 
 // 第三個示例的計算樣式
 const computedCardStyle = computed(() => {
-  const themeMap = {
+  const themeMap: Record<string, { bg: string; text: string }> = {
     primary: { bg: '#3b82f6', text: 'white' },
     success: { bg: '#10b981', text: 'white' },
     warning: { bg: '#f59e0b', text: 'white' },
     danger: { bg: '#ef4444', text: 'white' }
   }
 
-  const sizeMap = {
+  const sizeMap: Record<SizeType, { padding: string; fontSize: string }> = {
     small: { padding: '8px 12px', fontSize: '14px' },
     medium: { padding: '12px 16px', fontSize: '16px' },
     large: { padding: '16px 20px', fontSize: '18px' }
   }
 
   return {
-    backgroundColor: themeMap[theme.value].bg,
-    color: themeMap[theme.value].text,
+    backgroundColor: themeMap[theme.value]?.bg || '#3b82f6',
+    color: themeMap[theme.value]?.text || 'white',
     ...sizeMap[size.value],
     borderRadius: '8px',
     boxShadow: mode.value === 'dark' ? '0 4px 12px rgba(0,0,0,0.3)' : '0 2px 8px rgba(0,0,0,0.1)'
@@ -126,98 +88,27 @@ function resetCSS() {
   primaryColor.value = '#3b82f6'
   secondaryColor.value = '#8b5cf6'
   borderWidth.value = 3
-  borderRadius.value = 15
+  borderRadius.value = '15px'
   scale.value = 1
 }
 
-function updateFontSize() {
-  const sizes = ['12px', '16px', '20px', '24px', '28px']
-  const currentIndex = sizes.indexOf(fontSize.value)
-  const nextIndex = (currentIndex + 1) % sizes.length
-  fontSize.value = sizes[nextIndex]
-}
 
-function updateTextColor() {
-  const colors = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
-  const currentIndex = colors.indexOf(textColor.value)
-  const nextIndex = (currentIndex + 1) % colors.length
-  textColor.value = colors[nextIndex]
-}
 
-function updateBackgroundColor() {
-  const colors = ['#f3f4f6', '#dbeafe', '#d1fae5', '#fef3c7', '#fee2e2', '#ede9fe']
-  const currentIndex = colors.indexOf(backgroundColor.value)
-  const nextIndex = (currentIndex + 1) % colors.length
-  backgroundColor.value = colors[nextIndex]
-}
 
-function updateBorderRadius() {
-  const radiuses = ['0px', '4px', '8px', '16px', '24px', '50%']
-  const currentIndex = radiuses.indexOf(borderRadius.value)
-  const nextIndex = (currentIndex + 1) % radiuses.length
-  borderRadius.value = radiuses[nextIndex]
-}
 
-function updateBoxDimensions() {
-  const dimensions = [
-    { width: '200px', height: '150px' },
-    { width: '250px', height: '180px' },
-    { width: '180px', height: '120px' },
-    { width: '300px', height: '200px' }
-  ]
 
-  const currentIndex = dimensions.findIndex(d =>
-    d.width === boxStyle.value.width && d.height === boxStyle.value.height
-  )
-  const nextIndex = (currentIndex + 1) % dimensions.length
-  const next = dimensions[nextIndex]
 
-  boxStyle.value = { ...boxStyle.value, ...next }
-}
 
-function updateBoxTheme() {
-  const themes = [
-    { backgroundColor: '#e0e7ff', border: '2px solid #6366f1', color: '#4338ca' },
-    { backgroundColor: '#dcfce7', border: '2px solid #22c55e', color: '#15803d' },
-    { backgroundColor: '#fef3c7', border: '2px solid #f59e0b', color: '#d97706' },
-    { backgroundColor: '#fee2e2', border: '2px solid #ef4444', color: '#dc2626' }
-  ]
 
-  const currentIndex = themes.findIndex(t => t.backgroundColor === boxStyle.value.backgroundColor)
-  const nextIndex = (currentIndex + 1) % themes.length
-  const next = themes[nextIndex]
 
-  boxStyle.value = { ...boxStyle.value, ...next }
-}
 
-function animateBox() {
-  const animations = [
-    { transform: 'translateX(0px)', opacity: 1 },
-    { transform: 'translateX(50px)', opacity: 0.7 },
-    { transform: 'translateX(-30px) rotate(10deg)', opacity: 0.8 },
-    { transform: 'translateY(-20px) scale(1.1)', opacity: 0.9 }
-  ]
 
-  const currentIndex = animations.findIndex(a => a.transform === animationStyle.value.transform)
-  const nextIndex = (currentIndex + 1) % animations.length
-  const next = animations[nextIndex]
 
-  animationStyle.value = { ...animationStyle.value, ...next }
-}
 
-function updateTheme() {
-  const themes = ['blue', 'green', 'purple', 'red']
-  const currentIndex = themes.indexOf(theme.value)
-  const nextIndex = (currentIndex + 1) % themes.length
-  theme.value = themes[nextIndex]
-}
 
-function updateSize() {
-  const sizeKeys = ['small', 'medium', 'large']
-  const currentIndex = sizeKeys.indexOf(size.value)
-  const nextIndex = (currentIndex + 1) % sizeKeys.length
-  size.value = sizeKeys[nextIndex]
-}
+
+
+
 </script>
 
 <template>

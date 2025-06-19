@@ -4,11 +4,8 @@ import { ref } from 'vue'
 // 演示用的響應式狀態
 const id = ref('dynamic-element')
 const className = ref('btn-primary')
-const src = ref('https://placehold.jp/3d4070/ffffff/200x120.png?text=Demo')
-const alt = ref('示例圖片')
 const href = ref('#section1')
 const title = ref('這是標題文字')
-const placeholder = ref('請輸入內容...')
 
 // 用於展示同名簡寫的狀態
 const width = ref('300px')
@@ -28,51 +25,11 @@ function updateClass() {
   className.value = classes[nextIndex]
 }
 
-function updateImage() {
-  const sizes = [
-    { w: 200, h: 120 },
-    { w: 250, h: 150 },
-    { w: 300, h: 180 },
-    { w: 180, h: 100 }
-  ]
-  const current = src.value.match(/(\d+)\/(\d+)/)
-  if (!current) return
 
-  const currentW = parseInt(current[1])
-  const currentIndex = sizes.findIndex(s => s.w === currentW)
-  const nextIndex = (currentIndex + 1) % sizes.length
-  const next = sizes[nextIndex]
 
-  src.value = `https://placehold.jp/3d4070/ffffff/${next.w}x${next.h}.png?text=Image+${next.w}x${next.h}`
-  alt.value = `示例圖片 ${next.w}x${next.h}`
-}
 
-function updateLink() {
-  const links = [
-    { href: '#section1', title: '第一個區塊' },
-    { href: '#section2', title: '第二個區塊' },
-    { href: '#section3', title: '第三個區塊' },
-    { href: '#home', title: '回到首頁' }
-  ]
-  const currentIndex = links.findIndex(l => l.href === href.value)
-  const nextIndex = (currentIndex + 1) % links.length
-  const next = links[nextIndex]
 
-  href.value = next.href
-  title.value = next.title
-}
 
-function updateInput() {
-  const placeholders = [
-    '請輸入內容...',
-    '在這裡輸入文字',
-    '來試試看吧',
-    '輸入您的想法'
-  ]
-  const currentIndex = placeholders.indexOf(placeholder.value)
-  const nextIndex = (currentIndex + 1) % placeholders.length
-  placeholder.value = placeholders[nextIndex]
-}
 
 function updateDimensions() {
   const dimensions = [

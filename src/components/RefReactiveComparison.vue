@@ -137,22 +137,20 @@ const replaceReactiveUser = () => {
 // 解構測試
 const testRefDestructuring = () => {
   // ⚠️ 從 ref 中解構原始值會失去響應性
-  let { name, age } = refUserData.value
+  let { name } = refUserData.value
 
   // 修改解構出來的變數不會影響原始響應式狀態
   name = '解構測試'
-  age = 999
 
   addLog(`Ref: 解構原始值測試 - 原始姓名: ${refUserData.value.name}, 解構變數: ${name} ⚠️ 失去響應性`)
 }
 
 const testReactiveDestructuring = () => {
   // ❌ 從 reactive 中解構原始值會失去響應性
-  let { name, age } = reactiveUserData
+  let { name } = reactiveUserData
 
   // 修改解構出來的變數不會影響原始響應式狀態
   name = '解構測試'
-  age = 999
 
   addLog(`Reactive: 解構原始值測試 - 原始姓名: ${reactiveUserData.name}, 解構變數: ${name} ❌ 失去響應性`)
 }

@@ -13,7 +13,6 @@ const formData = ref({ name: '' })
 
 // 各種 Truthy/Falsy 值測試
 const truthyValue = ref<any>(true)
-const falsyValue = ref<any>(false)
 
 // Truthy/Falsy 測試選項
 const testValues = [
@@ -380,8 +379,8 @@ async function handleSubmit() {
       <div class="space-y-4">
         <div class="grid grid-cols-2 md:grid-cols-5 gap-2">
           <template
-            v-for="(item, index) in testValues"
-            :key="index"
+            v-for="item in testValues"
+            :key="item.label"
           >
             <button
               @click="setTestValue(item.value)"

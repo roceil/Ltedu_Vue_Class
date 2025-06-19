@@ -2,7 +2,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const cleanupLogs = ref<string[]>([])
-const timers = ref<{ id: number; timer: NodeJS.Timeout; name: string }[]>([])
+const timers = ref<{ id: number; timer: ReturnType<typeof setInterval>; name: string }[]>([])
 const eventListeners = ref<{ element: string; event: string; handler: () => void }[]>([])
 const activeConnections = ref<{ id: number; name: string; status: string }[]>([])
 
